@@ -6,7 +6,11 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
+  template: `
+    <h1 class="text-3xl font-bold underline">
+      Angular 16
+    </h1>
+  `,
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
