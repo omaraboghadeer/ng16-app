@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './core/header/header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, HeaderComponent],
   template: `
-    <h1 class="text-3xl font-bold underline">
-      Angular 16
-    </h1>
+    <app-header/>
+    <div class="container p-5">
+      <router-outlet/>
+    </div>
   `,
   styleUrls: ['./app.component.scss']
 })
