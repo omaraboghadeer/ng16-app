@@ -5,14 +5,18 @@ import { GhUsersService } from './gh-users.service';
 describe('GhUsersService', () => {
   let service: GhUsersService;
 
-  const httpMock = {}
-  
+  const httpMock = {
+    get: jest.fn()
+  } as any;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(GhUsersService);
+    service = new GhUsersService(httpMock);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should be return a user', () => {
+    const expectedUser = 'el user' as any;
+    httpMock.get.mockReturnValue(expectedUser);
+    const user = service.searchUser('test')
+    expect(user).toBe(expectedUser);
   });
 });
