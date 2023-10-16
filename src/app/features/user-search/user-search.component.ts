@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
     <input #input type="text" (input)="searchTerm.set(input.value)"
       class="border-white border-2 border-solid p-2 w-full bg-transparent rounded-lg outline-0">
     <ul>
-      <li *ngFor="let user of ghUsers()" class="border-white border-solid border-2 rounded-lg my-5 py-2 flex items-center cursor-pointer" [routerLink]="['/user-details', user.login]" >
+      <li *ngFor="let user of ghUsers();" class="border-white border-solid border-2 rounded-lg my-5 py-2 flex items-center cursor-pointer" [routerLink]="['/user-details', user.login]" >
         <img [src]="user.avatar_url" class="rounded-full w-12 h-12 mr-5 object-cover">
         {{user.login}}
       </li>
@@ -29,12 +29,12 @@ export class UserSearchComponent {
 
   searchTerm = signal('');
   ghUsers: Signal<GitHubUser[]> = toSignal(
-      toObservable(this.searchTerm).pipe(
-      debounceTime(500),
-      distinctUntilChanged(),
+    toObservable(this.searchTerm).pipe(
+      debounceTime(500), // It's delay the request.
+      distinctUntilChanged(), // Only emit when the current value is different than the last
       filter(term => term.length > 0),
       switchMap(term => this.ghUserService.searchUsers('search/users', term))
-    ), 
+  ), 
     {initialValue: []}
   );
   
