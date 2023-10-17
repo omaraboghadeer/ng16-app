@@ -1,0 +1,7 @@
+// table {
+//     background-color: white;
+// }
+table > tbody > tr:first-child > td {
+    background-color: gray;
+    color: white;
+}

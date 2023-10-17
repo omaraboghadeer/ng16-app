@@ -13,7 +13,7 @@ import { HeaderComponent } from './core/header/header.component';
   ],
   template: `
     <app-header/>
-    <div class="container p-5">
+    <div class="container mx-auto p-5">
       <!-- <p>Counter: {{ counter() }}</p>
       <br>
       <button (click)="increment()" class="bg-gray-500 p-2 rounded-lg me-3">Increment</button>
