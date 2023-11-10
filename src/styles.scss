@@ -2,3 +2,313 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* You can add global styles to this file, and also import other style files */
+$primary: #158CF5;
+$secondary: #3A3A3A;
+
+/* Angular material custom theme */
+@use '../node_modules/@angular/material/' as mat;
+
+@include mat.core();
+
+// Set the default typography
+@include mat.all-component-typographies(mat.define-typography-config($font-family: 'DINNextLTArabic'));
+
+// Define the default theme
+$default-theme: mat.define-light-theme((typography: mat.define-typography-config($font-family: 'DINNextLTArabic',
+            ),
+            density: 0,
+        ));
+
+@include mat.all-component-themes($default-theme);
+
+:root {
+    --sidebar-width: 200px;
+    --m-color: #158CF5;
+    --s-color: #3A3A3A;
+    --bg-color: #F5F6FB;
+    --shadow-c1: #B8C1C6;
+    --stepper-header-bg: #F3F3F3;
+}
+
+.page-title span {
+    color: #212529;
+}
+
+
+/* Bootstrap custom theme */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+$theme-colors: map-merge($theme-colors, ("primary": $primary,
+            "secondary": $secondary,
+            "dropdown-link-active-bg": $primary));
+
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+
+// regular style toast
+@import 'ngx-toastr/toastr';
+
+@font-face {
+    font-family: 'DINNextLTArabic';
+    src: url('assets/fonts/DINNextLTArabic-Bold.eot');
+    /* IE9 Compat Modes */
+    src: url('assets/fonts/DINNextLTArabic-Regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('assets/fonts/DINNextLTArabic-Regular.woff') format('woff'),
+        /* Pretty Modern Browsers */
+        url('assets/fonts/DINNextLTArabic-Regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('assets/fonts/DINNextLTArabic-Regular.svg#svgFontName') format('svg');
+    /* Legacy iOS */
+}
+
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+@import 'themes/en';
+
+html[dir="rtl"] {
+    @import 'themes/ar.scss';
+    direction: rtl;
+}
+
+// ----
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    background: #fff;
+    font-family: 'DINNextLTArabic', sans-serif;
+    // color: var(--m-color);
+    color: #212529;
+}
+
+mat-stepper {
+    .mat-horizontal-stepper-header-container {
+        justify-content: center;
+        background-color: #f3f3f3;
+    }
+
+    .mat-horizontal-stepper-header-container .mat-stepper-horizontal-line {
+        max-width: 85px !important;
+    }
+}
+
+ul {
+    padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
+}
+
+input[type="date"] {
+    &::-webkit-calendar-picker-indicator {
+        display: block;
+        background: url(assets/images/calendar.png) no-repeat;
+        background-size: cover;
+        opacity: .6;
+    }
+}
+
+input[type="datetime-local"] {
+    &::-webkit-calendar-picker-indicator {
+        display: block;
+        background: url(assets/images/calendar.png) no-repeat;
+        background-size: cover;
+        opacity: .6;
+    }
+}
+
+input[type="file"] {
+    &::file-selector-button {
+        border: none;
+        background-color: var(--m-color) !important;
+        color: white;
+        border-radius: 0 0.25rem 0.25rem 0;
+    }
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
+a {
+    text-decoration: none
+}
+
+hr {
+    color: #B0B0B0
+}
+
+.bg-dark {
+    background-color: var(--m-color) !important;
+}
+
+.page-title {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
+
+    img {
+        height: 25px;
+        width: 25px;
+        object-fit: contain;
+    }
+
+    span {
+        display: inline-block;
+        margin-inline-start: 12px;
+    }
+}
+
+.btn {
+    border-radius: 0.25rem;
+    min-width: 100px;
+}
+
+.btn-icon {
+    min-width: auto;
+
+    &:active {
+        border-color: transparent;
+        box-shadow: 1px 0px 5px rgba($color: #000000, $alpha: 0.2);
+    }
+}
+
+:is(button).btn.btn-link {
+    background: gainsboro;
+    width: 100%;
+    text-align: start;
+}
+
+.mat-mdc-icon-button svg {
+    vertical-align: super;
+}
+
+.form-control,
+.form-select {
+    border-radius: 0.25rem;
+}
+
+.form-control::placeholder {
+    color: #bdbdbd;
+    font-size: 14px;
+}
+
+.card {
+    overflow: hidden;
+}
+
+// WIZERED || STEPPER
+.mat-horizontal-stepper-header-container {
+    background-color: var(--stepper-header-bg);
+    box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
+
+    .mat-step-icon {
+        background-color: rgba($color: $primary, $alpha: 0.7);
+    }
+
+    .mat-step-icon-selected {
+        background-color: rgba($color: $primary, $alpha: 1);
+    }
+}
+
+// start table
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.table td, .table th {
+    padding: 0.5rem 0.5rem;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.table > thead th {
+    background: $primary;
+    color: #fff;
+    font-weight: normal;
+
+    tr {
+        border-top: 1px solid white;
+        display: flex;
+        th {
+            flex: 1;
+            border-right: 1px solid white;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+    }
+}
+.table > tbody td tr {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+
+    td {
+        flex: 1;
+        border-right: 1px solid rgba(0, 0, 0, 0.05);
+        &:last-child {
+            border-right: none;
+        }
+    }
+}
+.table> :not(caption)>*>* {
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.ngx-pagination .current {
+    background: var(--m-color) !important;
+}
+
+// end table
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: var(--m-color);
+}
+
+.btn-primary{
+    color: #fff;
+}
+
+.btn-primary:hover{
+    color: #fff;
+}
+
+.btn-primary:active{
+    color: #fff !important;
+}
+
+.btn-primary:disabled{
+    color: #fff !important;
+}
+
+.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab{
+    flex-grow: 0.1 !important;
+}
