@@ -3,11 +3,12 @@ import { CommonModule, NgFor } from '@angular/common';
 import * as XLSX from 'xlsx';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { map } from 'rxjs';
+import { RequestActionsParentComponent } from '../request-actions-parent/request-actions-parent.component';
 
 @Component({
   selector: 'app-converting-xlsx',
   standalone: true,
-  imports: [CommonModule, NgFor, HttpClientModule],
+  imports: [CommonModule, NgFor, HttpClientModule, RequestActionsParentComponent],
   template: `
     <h1 class="text-6xl capitalize mb-4">
       converting xlsx!
@@ -46,11 +47,69 @@ import { map } from 'rxjs';
         </tr>
       </tbody>
     </table>
+
+
+    <br>
+
+    <request-actions-parent [content]="reqActioncontent"></request-actions-parent>
   `,
   styleUrls: ['./converting-xlsx.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConvertingXlsxComponent implements OnInit {
+
+  reqActioncontent: {
+    isEditMode?: boolean | undefined;
+    actionName: string;
+    title: string;
+    formJson:  {controls: JsonControls[]};
+    apiUrl: string;
+  } = {
+    title: 'Accept claim request',
+    actionName: 'accept_claim_request',
+    apiUrl: '/request/approveRequest',
+    formJson: {
+      controls: [
+        {
+          name: "firstName",
+          label: "First name ",
+          value: "",
+          type: "text",
+          validators: {
+            required: true,
+            maxLength: 10
+          }
+        },
+        {
+          name: "age",
+          label: "Age",
+          value: "",
+          type: "number",
+          validators: {
+            required: true,
+            max: 30
+          }
+        },
+        {
+          name: "nid",
+          label: "Upload attachment",
+          value: "",
+          type: "file",
+          validators: {
+            required: true
+          }
+        },
+
+        {
+          name: "comments",
+          label: "Notes",
+          value: "",
+          type: "textarea",
+          validators: {}
+        },
+      ]
+    }
+  }
 
   data: any;
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
@@ -98,3 +157,22 @@ export class ConvertingXlsxComponent implements OnInit {
 }
 
 type AOA = any[][];
+
+
+interface JsonControls {
+  id?:         number;
+  name?:       string;
+  label?:      string;
+  value?:      string;
+  type?:      string;
+  validators?: JsonValidators;
+}
+
+interface JsonValidators {
+  required?:  boolean;
+  minLength?: number;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+  pattern?: string;
+}

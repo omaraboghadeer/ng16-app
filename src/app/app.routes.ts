@@ -14,8 +14,12 @@ export const routes: Routes = [
         loadComponent: () => import('./features/converting-xlsx/converting-xlsx.component').then(c => c.ConvertingXlsxComponent)
     },
     {
+        path: 'request',
+        loadComponent: () => import('./features/request-actions-view/request-actions-view.component').then(c => c.RequestActionsViewComponent)
+    },
+    {
         path: '',
-        redirectTo: 'xlsx-converting',
+        redirectTo: 'request',
         pathMatch: 'full'
     }
 ];
